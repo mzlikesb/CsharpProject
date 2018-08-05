@@ -1,38 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Collections;
 namespace ConsoleApp1
 {   // 메인 프로그램
     // 과목정보 구조 선언.
-    public struct ClassInfo
+    class ClassInfo : IComparable, IEnumerable
 	{
 		public string code;
 		public int section;
-		public int credit;		
-	}
+		public int credit;
+
+        public int CompareTo(object obj)
+        {
+            return code.CompareTo(obj);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable)code).GetEnumerator();
+        }
+    }
 
     // 학생정보 구조 선언
-	struct StudentInfo
+	class StudentInfo :IComparable
 	{
 		public int id;
         public SingleLinkedList<ClassInfo> classList;
-	}
+
+        public int CompareTo(object obj)
+        {
+            return id.CompareTo(obj);
+        }
+    }
 
     class Program
-    {   //기본 학생수 20명, 최대 학생수 30명;
+    {
+        //기본 학생수 20명, 최대 학생수 30명;
         public const int MAX_STUDENT_CNT = 30;
         public const int MIN_STUDENT_CNT = 20;
 
         static void Main(string[] args)
         {
+
             Registration registor = new Registration();
             int nMenu = 0;
 
             // 최대 학생수로 배열크기를 정함.
-            StudentInfo[] studentList = new StudentInfo[MAX_STUDENT_CNT];
+            //StudentInfo[] studentList = new StudentInfo[MAX_STUDENT_CNT];
+            SingleLinkedList<StudentInfo> studentList = new SingleLinkedList<StudentInfo>();
             // 초기화
             registor.CreateStudentList(studentList);
 
@@ -55,6 +69,7 @@ namespace ConsoleApp1
                 if (registor.RunFunction(nMenu, studentList) == -1)
                     break;
             }
+
         }
     }
 }

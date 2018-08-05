@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
@@ -10,17 +6,23 @@ namespace ConsoleApp1
     {//수강신청 처리 클래스
         
         //	학생 정보 초기화
-        public int CreateStudentList(StudentInfo[] studentList)
+        public int CreateStudentList(SingleLinkedList<StudentInfo> studentList)
         {
-            int i = 0;
+            int i= 0;
+            StudentInfo studentInfo = new StudentInfo();
 
 	        for(i = 0; i < Program.MAX_STUDENT_CNT; i++)
 	        {
                 if (i < Program.MIN_STUDENT_CNT)
-			        studentList[i].id = 1001 + i;
-		        else
-			        studentList[i].id = -1;
-                studentList[i].classList = new SingleLinkedList<ClassInfo>();
+                {
+                    studentList.Add(new StudentInfo() { id= 1001 + i });
+                }
+                else
+                {
+                    studentList.Add(new StudentInfo() { id = -1 });
+
+                }
+                studentList[i].classList.Add(new ClassInfo());
 	        }
             //기본 20명의 학생정보 출력
             Console.WriteLine("기등록 된 " + Program.MIN_STUDENT_CNT + "명의 학생 목록");
@@ -44,7 +46,7 @@ namespace ConsoleApp1
         }
         
         //	기능부
-        public int RunFunction(int n, StudentInfo[] studentList)
+        public int RunFunction(int n, SingleLinkedList<StudentInfo> studentList)
         {
 	        switch(n)
 	        {
@@ -71,7 +73,7 @@ namespace ConsoleApp1
 	        return 0;
         }
         //	케이스 1 모든 학생정보 출력
-        private void DisplayAllInfo(StudentInfo[] studentList)
+        private void DisplayAllInfo(SingleLinkedList<StudentInfo> studentList)
         {
 	        int i = 0;
 	       
@@ -99,7 +101,7 @@ namespace ConsoleApp1
 
         
         // 학생 등록
-        private void AddStudent(StudentInfo[] studentList)
+        private void AddStudent(SingleLinkedList<StudentInfo> studentList)
         {
 	        int stuID;
 	        int i = 0;
@@ -135,14 +137,16 @@ namespace ConsoleApp1
                 Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
                 return;
             }
-        	
+
             // 학생 등록
-	        studentList[i].id = stuID;
+            StudentInfo std = new StudentInfo();
+	        std.id = stuID;
+            studentList.Add(std);
             Console.WriteLine(stuID.ToString() + " 추가되었습니다.\n");
         }
         
         //	과목 등록
-        private void AddClass(StudentInfo[] studentList)
+        private void AddClass(SingleLinkedList<StudentInfo> studentList)
         {
 	        int stuID = 0;
 	        int index = -1;
@@ -217,7 +221,7 @@ namespace ConsoleApp1
         }
         
         //	수강포기
-        private void DropClass(StudentInfo[] studentList)
+        private void DropClass(SingleLinkedList<StudentInfo> studentList)
         {
 	        int stuID = 0;
 	        int index = -1;
@@ -258,7 +262,7 @@ namespace ConsoleApp1
                 return;
 	        }
             //수강과목이 없을경우
-	        if(studentList[index].classList.Count == 0)
+	        if(studentList[index].classList.Length() == 0)
 	        {
                 Console.WriteLine("현재 수강하고 있는 과목이 없습니다.\n");
 		        return;
@@ -294,7 +298,7 @@ namespace ConsoleApp1
                 return;
             }
 
-            for(i = 0; i < studentList[index].classList.Count; i++)
+            for(i = 0; i < studentList[index].classList.Length(); i++)
             {
                 if(studentList[index].classList[i].code == dropCode &&
                     studentList[index].classList[i].section == dropSection)
@@ -302,7 +306,7 @@ namespace ConsoleApp1
                     Console.WriteLine("과목명 : " + studentList[index].classList[i].code + ", 분반 : " + 
                          studentList[index].classList[i].section.ToString() + " 과목이 삭제되었습니다.\n");
                     
-                    studentList[index].classList.RemoveAt(i);                    
+                    studentList[index].classList.Del(i);                    
                     return;
                 }
             }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
 
 namespace ConsoleApp1
 {
@@ -20,7 +17,7 @@ namespace ConsoleApp1
     }
 
     // 단일 연결 리스트 클래스
-    class SingleLinkedList<T> : IComparable
+    class SingleLinkedList<T> : IComparable, IEnumerable
     {
         private Node<T> start;                      // head 역할
         private Node<T> end;                        // tail 역할 
@@ -135,6 +132,11 @@ namespace ConsoleApp1
             return this.CompareTo(obj);
         }
 
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable)this).GetEnumerator();
+        }
+
         public T this[int x]
         {
             get { return Get(x); }
@@ -147,10 +149,6 @@ namespace ConsoleApp1
                 }
                 temp.info = value;
             }
-
-
         }
-
-
     }
 }
