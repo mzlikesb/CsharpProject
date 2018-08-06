@@ -28,33 +28,7 @@ namespace ConsoleApp1
 
         static void Main(string[] args)
         {
-            Registration registor = new Registration();
-            int nMenu = 0;
 
-            // 최대 학생수로 배열크기를 정함.
-            StudentInfo[] studentList = new StudentInfo[MAX_STUDENT_CNT];
-            // 초기화
-            registor.CreateStudentList(studentList);
-
-            while (true)
-            {
-                Console.WriteLine("메뉴 번호를 입력후 Enter 키를 누르세요 : ");
-                // 콘솔 메뉴
-                registor.DisplayMenu();
-                try
-                {
-                    // 선택입력받음
-                    nMenu = int.Parse(Console.ReadLine());
-                }
-                catch (FormatException)
-                {   // 오류 예외처리
-                    Console.WriteLine("Error! 1에서 5번까지의 숫자를 입력해주세요.\n");
-                    continue;
-                }
-
-                if (registor.RunFunction(nMenu, studentList) == -1)
-                    break;
-            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace ConsoleApp1
     }
 
     // 단일 연결 리스트 클래스
-    class SingleLinkedList<T> : IComparable
+    class SingleLinkedList<T> : IComparable, IEnumerable, IEnumerator
+
     {
         private Node<T> start;                      // head 역할
         private Node<T> end;                        // tail 역할 
@@ -35,11 +37,6 @@ namespace ConsoleApp1
         {
             return start;
         }                // Start를 찾아오는 함수
-
-        public Node<T> GetEnd()
-        {
-            return end;
-        }
 
         public T Get(int x)
         {
@@ -139,7 +136,70 @@ namespace ConsoleApp1
         {
             return this.CompareTo(obj);
         }
+        private T[] array;
 
+        int position = -1;
+        // position이 -1인 이유는 foreach문이 실행 될 때, 첫 번째 반복을 실행할 경우
+        // MoveNext()를 호출하면서 position이 0이 되어 0번지를 호출할 수 있게 된다.
+        // 만약 0으로 지정해뒀다면, 1이 되어 두 번째 요소부터 접근하게 되어 버린다.
+
+        public T this[int index]
+        {
+            get
+            {
+                return array[index];
+            }
+            set
+            {
+                if (index >= array.Length)
+                {
+                    Array.Resize<T>(ref array, index + 1);
+                    Console.WriteLine("Array Resized : {0}", array.Length);
+                }
+
+                array[index] = value;
+            }
+        }
+
+        // IEnumerator 멤버
+        public object Current   // IEnumerator로부터 상속받은 Current 프로퍼티는 현재 위치의 요소를 반환한다.
+        {
+            get
+            {
+                return array[position];
+            }
+        }
+
+        // IEnumerator 멤버
+        public bool MoveNext()
+        {
+            if (position == array.Length - 1)
+            {
+                Reset();
+                return false;
+            }
+
+            position++;
+            return (position < array.Length);
+        }
+
+        // IEnumerator 멤버
+        public void Reset() // IEnumerator로부터 상속받은 Reset() 메소드. 요소의 위치를 첫 요소의 앞으로 옮긴다.
+        {
+            position = -1;
+        }
+
+        // IEnumerable 멤버
+        public IEnumerator GetEnumerator()
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                yield return (array[i]);
+            }
+        }
+    
+
+        /*
         public T this[int x]
         {
             get { return Get(x); }
@@ -155,7 +215,7 @@ namespace ConsoleApp1
 
 
         }
-
+        */
 
     }
 }
