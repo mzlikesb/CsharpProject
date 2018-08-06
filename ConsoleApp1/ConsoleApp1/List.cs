@@ -84,7 +84,11 @@ namespace ConsoleApp1
 
         public void Del(int x)
         {
-            if (Length() == x + 1)
+            if (Length() == 1)
+            {
+                start = null;
+                end = null;
+            }else if (Length() == x + 1)
             {
                 end = GetNode(x - 1);
                 GetNode(x - 1).link = null;
@@ -100,7 +104,15 @@ namespace ConsoleApp1
         {
             if (start == y)
             {
-                start = start.link;     // 스타트가 이제 기존의 스타트가 가리키던 얘를 가리킨다.
+                if (start == end)//노드가 하나일때
+                {
+                    start = null;
+                    end = null;
+                }
+                else
+                {
+                    start = start.link;     // 스타트가 이제 기존의 스타트가 가리키던 얘를 가리킨다.
+                }
             }
             else
             {
@@ -154,7 +166,6 @@ namespace ConsoleApp1
                 if (index >= array.Length)
                 {
                     Array.Resize<T>(ref array, index + 1);
-                    Console.WriteLine("Array Resized : {0}", array.Length);
                 }
 
                 array[index] = value;

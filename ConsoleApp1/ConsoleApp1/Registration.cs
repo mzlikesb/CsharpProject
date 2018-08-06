@@ -86,20 +86,27 @@ namespace ConsoleApp1
 			        continue;
 
                 Console.Write("  {0,3}  | {1,4} |", i + 1, studentList[i].id);
-                if (studentList[i].classList.GetStart() == null)
+                if (studentList[i].classList.GetStart() ==null)
                 {
                     Console.WriteLine("");
                 }
                 else
                 {
-                    foreach (ClassInfo ci in studentList[i].classList)
+                    for (int j = 0; j < studentList[i].classList.Length(); j++)
                     {
-
-                        Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +
-                            ci.credit.ToString() + ")");
+                        Console.Write("("+studentList[i].classList.Get(j).code + ", ");
+                        Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
+                        Console.Write(studentList[i].classList.Get(j).credit.ToString()+") ");
                     }
-                
-                Console.WriteLine("");
+                    
+                    //foreach (ClassInfo ci in studentList[i].classList)
+                    //{
+
+                        //Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +ci.credit.ToString() + ")");
+
+                    //}
+
+                    Console.WriteLine("");
                 }
             }
             Console.WriteLine("========================================================\n");
@@ -146,6 +153,7 @@ namespace ConsoleApp1
         	
             // 학생 등록
 	        studentList[i].id = stuID;
+            studentList[i].classList = new SingleLinkedList<ClassInfo>();
             Console.WriteLine(stuID.ToString() + " 추가되었습니다.\n");
         }
         
@@ -222,6 +230,7 @@ namespace ConsoleApp1
             Console.WriteLine("학번 : " + studentList[index].id.ToString() + ", 추가됨 (" +
                 tempInfo.code + ", " + 
 		        tempInfo.section.ToString() + ", " + tempInfo.credit.ToString() + ")\n");
+            //Console.WriteLine(studentList[index].classList.GetStart().info.code);
         }
         
         //	수강포기
@@ -279,9 +288,17 @@ namespace ConsoleApp1
             Console.WriteLine("-------------------------------------------------");
 
             i = 0;
+            /*
             foreach (ClassInfo ci in studentList[index].classList)
             {
                 Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}",i, ci.code, ci.section, ci.credit);
+            }
+            */
+            for (int j = 0; j < studentList[i].classList.Length(); j++)
+            {
+                Console.Write("(" + studentList[i].classList.Get(j).code + ", ");
+                Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
+                Console.Write(studentList[i].classList.Get(j).credit.ToString() + ") ");
             }
             Console.WriteLine("-------------------------------------------------");
 
@@ -304,11 +321,11 @@ namespace ConsoleApp1
             
             for(i = 0; i < studentList[index].classList.Length(); i++)
             {
-                if (studentList[index].classList[i].code == dropCode &&
-                    studentList[index].classList[i].section == dropSection)
+                if (studentList[index].classList.Get(i).code == dropCode &&
+                    studentList[index].classList.Get(i).section == dropSection)
                 {
-                    Console.WriteLine("과목명 : " + studentList[index].classList[i].code + ", 분반 : " + 
-                         studentList[index].classList[i].section.ToString() + " 과목이 삭제되었습니다.\n");
+                    Console.WriteLine("과목명 : " + studentList[index].classList.Get(i).code + ", 분반 : " + 
+                         studentList[index].classList.Get(i).section.ToString() + " 과목이 삭제되었습니다.\n");
                     
                     studentList[index].classList.Del(i);                    
                     return;
