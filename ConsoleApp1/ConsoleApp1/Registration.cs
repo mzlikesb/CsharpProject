@@ -287,7 +287,7 @@ namespace ConsoleApp1
 	        Console.WriteLine(" 과목명              분반              학점 ");
             Console.WriteLine("-------------------------------------------------");
 
-            i = 0;
+            //i = 0;
             /*
             foreach (ClassInfo ci in studentList[index].classList)
             {
@@ -319,15 +319,15 @@ namespace ConsoleApp1
                 return;
             }
             
-            for(i = 0; i < studentList[index].classList.Length(); i++)
+            for(int j = 0; j < studentList[index].classList.Length(); j++)
             {
-                if (studentList[index].classList.Get(i).code == dropCode &&
-                    studentList[index].classList.Get(i).section == dropSection)
+                if (studentList[index].classList.Get(j).code == dropCode &&
+                    studentList[index].classList.Get(j).section == dropSection)
                 {
-                    Console.WriteLine("과목명 : " + studentList[index].classList.Get(i).code + ", 분반 : " + 
-                         studentList[index].classList.Get(i).section.ToString() + " 과목이 삭제되었습니다.\n");
+                    Console.WriteLine("과목명 : " + studentList[index].classList.Get(j).code + ", 분반 : " + 
+                         studentList[index].classList.Get(j).section.ToString() + " 과목이 삭제되었습니다.\n");
                     
-                    studentList[index].classList.Del(i);                    
+                    studentList[index].classList.Del(j);                    
                     return;
                 }
             }

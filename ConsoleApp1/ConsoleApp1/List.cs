@@ -84,10 +84,11 @@ namespace ConsoleApp1
 
         public void Del(int x)
         {
-            if (Length() == 1)
+            if (start == end)
             {
                 start = null;
                 end = null;
+
             }else if (Length() == x + 1)
             {
                 end = GetNode(x - 1);
