@@ -48,7 +48,6 @@ namespace ConsoleApp1
             return temp.info;
         }                 // 노드의 정보를 가져오는 함수
 
-
         public Node<T> GetNode(int x)
         {
             Node<T> temp = start;
@@ -160,16 +159,11 @@ namespace ConsoleApp1
         {
             get
             {
-                return array[index];
+                return Get(index);
             }
             set
             {
-                if (index >= array.Length)
-                {
-                    Array.Resize<T>(ref array, index + 1);
-                }
-
-                array[index] = value;
+                GetNode(index).info = value;
             }
         }
 
@@ -178,21 +172,21 @@ namespace ConsoleApp1
         {
             get
             {
-                return array[position];
+                return Get(position);
             }
         }
 
         // IEnumerator 멤버
         public bool MoveNext()
         {
-            if (position == array.Length - 1)
+            if (position ==Length() - 1)
             {
                 Reset();
                 return false;
             }
 
             position++;
-            return (position < array.Length);
+            return (position < Length());
         }
 
         // IEnumerator 멤버
@@ -204,30 +198,10 @@ namespace ConsoleApp1
         // IEnumerable 멤버
         public IEnumerator GetEnumerator()
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < Length(); i++)
             {
-                yield return (array[i]);
+                yield return (Get(i));
             }
-        }
-    
-
-        /*
-        public T this[int x]
-        {
-            get { return Get(x); }
-            set
-            {
-                Node<T> temp = start;
-                for (int i = 0; i < x; i++)
-                {
-                    temp = temp.link;
-                }
-                temp.info = value;
-            }
-
-
-        }
-        */
-
+        }   
     }
 }
