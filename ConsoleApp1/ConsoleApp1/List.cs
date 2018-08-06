@@ -36,6 +36,11 @@ namespace ConsoleApp1
             return start;
         }                // Start를 찾아오는 함수
 
+        public Node<T> GetEnd()
+        {
+            return end;
+        }
+
         public T Get(int x)
         {
             Node<T> temp = start;

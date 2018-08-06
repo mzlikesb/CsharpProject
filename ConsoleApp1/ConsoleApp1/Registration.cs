@@ -71,7 +71,7 @@ namespace ConsoleApp1
 	        return 0;
         }
         //	케이스 1 모든 학생정보 출력
-        private void DisplayAllInfo(StudentInfo[] studentList)
+        private void DisplayAllInfo(SingleLinkedList<StudentInfo> studentList)
         {
 	        int i = 0;
 	       
@@ -86,9 +86,10 @@ namespace ConsoleApp1
 
                 Console.Write("  {0,3}  | {1,4} |", i + 1, studentList[i].id);
 
-                foreach (ClassInfo ci in studentList[i].classList)
+                while (studentList[i].classList.GetEnd() != null)
                 {
-                    Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +
+                    StudentInfo student = studentList[i];
+                    Console.Write("  (" + student.classList..code + ", " + ci.section.ToString() + ", " +
                         ci.credit.ToString() + ")");
                 }
 
