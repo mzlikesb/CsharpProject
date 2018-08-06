@@ -71,7 +71,7 @@ namespace ConsoleApp1
 	        return 0;
         }
         //	케이스 1 모든 학생정보 출력
-        private void DisplayAllInfo(SingleLinkedList<StudentInfo> studentList)
+        private void DisplayAllInfo(StudentInfo[] studentList)
         {
 	        int i = 0;
 	       
@@ -86,11 +86,14 @@ namespace ConsoleApp1
 
                 Console.Write("  {0,3}  | {1,4} |", i + 1, studentList[i].id);
 
-                while (studentList[i].classList.GetEnd() != null)
+                SingleLinkedList<ClassInfo> classList = studentList[i].classList;
+                Node<ClassInfo> classInfo = classList.GetStart();
+                while (classInfo.link != null)
                 {
-                    StudentInfo student = studentList[i];
-                    Console.Write("  (" + student.classList..code + ", " + ci.section.ToString() + ", " +
-                        ci.credit.ToString() + ")");
+                    ClassInfo info = classInfo.info;
+                    Console.Write("  (" + info.code + ", " + info.section.ToString() + ", " +
+                        info.credit.ToString() + ")");
+                    classInfo = classInfo.link;
                 }
 
                 Console.WriteLine("");
@@ -244,22 +247,24 @@ namespace ConsoleApp1
             }
 
             // 해당학생 검색
-	        for(i = 0; i < Program.MAX_STUDENT_CNT; i++)
+            for (i = 0; i < Program.MAX_STUDENT_CNT; i++)
 	        {
 		        if(studentList[i].id == stuID)
 		        {
 			        index = i;
 			        break;
 		        }
-	        }
+            }
+            SingleLinkedList<ClassInfo> classList = studentList[index].classList;
+            Node<ClassInfo> classInfo = classList.GetStart();
 
-	        if(index == -1)
+            if (index == -1)
 	        {
                 Console.WriteLine("해당 학생이 존재하지 않습니다.\n");
                 return;
 	        }
             //수강과목이 없을경우
-	        if(studentList[index].classList.Count == 0)
+	        if(studentList[index].classList == null)
 	        {
                 Console.WriteLine("현재 수강하고 있는 과목이 없습니다.\n");
 		        return;
@@ -271,10 +276,10 @@ namespace ConsoleApp1
 	        Console.WriteLine(" 과목명              분반              학점 ");
             Console.WriteLine("-------------------------------------------------");
 
-            i = 0;
-            foreach (ClassInfo ci in studentList[index].classList)
-            {
-                Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}",i, ci.code, ci.section, ci.credit);
+            while (classInfo.link != null) {
+                ClassInfo info = classInfo.info;
+                Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}", i, info.code, info.section, info.credit);
+                classInfo = classInfo.link;
             }
             Console.WriteLine("-------------------------------------------------");
 
@@ -295,17 +300,19 @@ namespace ConsoleApp1
                 return;
             }
 
-            for(i = 0; i < studentList[index].classList.Count; i++)
-            {
-                if(studentList[index].classList[i].code == dropCode &&
-                    studentList[index].classList[i].section == dropSection)
-                {
-                    Console.WriteLine("과목명 : " + studentList[index].classList[i].code + ", 분반 : " + 
-                         studentList[index].classList[i].section.ToString() + " 과목이 삭제되었습니다.\n");
-                    
-                    studentList[index].classList.RemoveAt(i);                    
+            classInfo = classList.GetStart();
+            Node<ClassInfo> beforeClassInfo = null;
+            while (classInfo.link != null) {
+                ClassInfo info = classInfo.info;
+                if (info.code == dropCode && info.section == dropSection) {
+                    beforeClassInfo.link = classInfo.link;
+                    Console.WriteLine("과목명 : " + info.code + ", 분반 : " + info.section.ToString() + " 과목이 삭제되었습니다.\n");
+                    classInfo = null;
                     return;
+                } else {
+                    beforeClassInfo = classInfo;
                 }
+                classInfo = classInfo.link;
             }
 
             Console.WriteLine("Error! 찾을 수 없습니다.\n");            
