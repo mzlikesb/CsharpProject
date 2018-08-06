@@ -24,6 +24,7 @@ namespace ConsoleApp1
                 studentList[i].classList = new SingleLinkedList<ClassInfo>();
 	        }
             //기본 20명의 학생정보 출력
+            Console.WriteLine();
             Console.WriteLine("기등록 된 " + Program.MIN_STUDENT_CNT + "명의 학생 목록");
 
             DisplayAllInfo(studentList);
@@ -92,19 +93,21 @@ namespace ConsoleApp1
                 }
                 else
                 {
+                    /*
                     for (int j = 0; j < studentList[i].classList.Length(); j++)
                     {
                         Console.Write("("+studentList[i].classList.Get(j).code + ", ");
                         Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
                         Console.Write(studentList[i].classList.Get(j).credit.ToString()+") ");
                     }
+                    */
                     
-                    //foreach (ClassInfo ci in studentList[i].classList)
-                    //{
+                    foreach (ClassInfo ci in studentList[i].classList)
+                    {
 
-                        //Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +ci.credit.ToString() + ")");
+                        Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +ci.credit.ToString() + ")");
 
-                    //}
+                    }
 
                     Console.WriteLine("");
                 }
@@ -286,20 +289,19 @@ namespace ConsoleApp1
 	        Console.WriteLine("-------------------------------------------------");
 	        Console.WriteLine(" 과목명              분반              학점 ");
             Console.WriteLine("-------------------------------------------------");
-
-            //i = 0;
-            /*
+            int ii=1;
             foreach (ClassInfo ci in studentList[index].classList)
             {
-                Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}",i, ci.code, ci.section, ci.credit);
+                Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}",ii++, ci.code, ci.section, ci.credit);
             }
-            */
+            /*
             for (int j = 0; j < studentList[i].classList.Length(); j++)
             {
                 Console.Write("(" + studentList[i].classList.Get(j).code + ", ");
                 Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
                 Console.Write(studentList[i].classList.Get(j).credit.ToString() + ") ");
-            }
+                Console.WriteLine("");
+            }*/
             Console.WriteLine("-------------------------------------------------");
 
             // 드랍할 과목 정보 입력
