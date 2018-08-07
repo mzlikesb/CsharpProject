@@ -23,8 +23,8 @@ namespace ConsoleApp1
 
     class Program
     {   //기본 학생수 20명, 최대 학생수 30명;
-        public const int MAX_STUDENT_CNT = 30;
-        public const int MIN_STUDENT_CNT = 20;
+        public const int MAX_STUDENT_CNT = 999;
+        public const int MIN_STUDENT_CNT = 10;
 
         static void Main(string[] args)
         {
@@ -44,7 +44,7 @@ namespace ConsoleApp1
                 try
                 {
                     // 선택입력받음
-                    nMenu = int.Parse(Console.ReadLine());
+                    nMenu = Convert.ToInt32(Console.ReadLine());
                 }
                 catch (FormatException)
                 {   // 오류 예외처리
