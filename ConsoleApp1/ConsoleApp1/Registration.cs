@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,7 +105,7 @@ namespace ConsoleApp1
                     foreach (ClassInfo ci in studentList[i].classList)
                     {
 
-                        Console.Write("  (" + ci.code + ", " + ci.section.ToString() + ", " +ci.credit.ToString() + ")");
+                        Console.Write("  (과목명: " + ci.code + ", " + ci.section.ToString() + "분반 , " +ci.credit.ToString() + "학점)");
 
                     }
 
@@ -141,16 +141,16 @@ namespace ConsoleApp1
             Console.Write("학번을 입력하세요 : ");
             try
             {
-                stuID = int.Parse(Console.ReadLine());
-                if (stuID > 1999 || stuID < 1)
+                stuID = Convert.ToInt32(Console.ReadLine());
+                if (stuID > 1999 || stuID < 1011)
                 {
-                    Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                    Console.WriteLine("Error!! 올바른 학번이 아닙니다. [1011~1999]");
                     return;
                 }
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                Console.WriteLine("Error!! 올바른 학번이 아닙니다.");
                 return;
             }
         	
@@ -172,16 +172,16 @@ namespace ConsoleApp1
 	        Console.Write("학번을 입력하세요 : ");
 	        try
             {
-                stuID = int.Parse(Console.ReadLine());
-                if (stuID > 1999 || stuID < 1)
+                stuID = Convert.ToInt32(Console.ReadLine());
+                if (stuID > 1999 || stuID < 1001)
                 {
-                    Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                    Console.WriteLine("Error!! 올바른 학번이 아닙니다. [1001~1999]");
                     return;
                 }
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                Console.WriteLine("Error!! 올바른 학번이 아닙니다. [1001~1999]");
                 return;
             }
 
@@ -208,7 +208,7 @@ namespace ConsoleApp1
 	        Console.Write("분반 입력 : ");            
             try
             {
-                tempInfo.section = int.Parse(Console.ReadLine());               
+                tempInfo.section = Convert.ToInt32(Console.ReadLine());               
             }
             catch (FormatException)
             {
@@ -219,7 +219,7 @@ namespace ConsoleApp1
 	        Console.Write("학점 입력 : ");
             try
             {
-                tempInfo.credit = int.Parse(Console.ReadLine());
+                tempInfo.credit = Convert.ToInt32(Console.ReadLine());
             }
             catch (FormatException)
             {
@@ -230,9 +230,9 @@ namespace ConsoleApp1
             // 학생정보에 과목등록
             studentList[index].classList.Add(tempInfo);
 
-            Console.WriteLine("학번 : " + studentList[index].id.ToString() + ", 추가됨 (" +
+            Console.WriteLine("학번 : " + studentList[index].id.ToString() + ", 추가됨 (과목명: " +
                 tempInfo.code + ", " + 
-		        tempInfo.section.ToString() + ", " + tempInfo.credit.ToString() + ")\n");
+		        tempInfo.section.ToString() + "분반, " + tempInfo.credit.ToString() + "학점)\n");
             //Console.WriteLine(studentList[index].classList.GetStart().info.code);
         }
         
@@ -249,16 +249,16 @@ namespace ConsoleApp1
             try
             {
                 
-                stuID = int.Parse(Console.ReadLine());
-                if (stuID > 1999 || stuID < 1)
+                stuID = Convert.ToInt32(Console.ReadLine());
+                if (stuID > 1999 || stuID < 1001)
                 {
-                    Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                    Console.WriteLine("Error!! 올바른 학번이 아닙니다. [1001~1999]");
                     return;
                 }
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error!! 1 에서 1999까지의 숫자를 입력하세요.");
+                Console.WriteLine("Error!! 올바른 학번이 아닙니다. [1001~1999]");
                 return;
             }
 
@@ -313,7 +313,7 @@ namespace ConsoleApp1
 	        Console.Write("삭제할 과목의 분반 입력: ");
             try
             {
-                dropSection = int.Parse(Console.ReadLine());
+                dropSection = Convert.ToInt32(Console.ReadLine());
             }
             catch (FormatException)
             {
