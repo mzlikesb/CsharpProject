@@ -82,24 +82,29 @@ namespace ConsoleApp1
         }
 
         public void Del(int x)
-        {
+        {            
             if (start == end)
-            {
+            {   //노드가 1개일 때
                 start = null;
                 end = null;
 
-            }else if (Length() == x + 1)
+            }else if (x==0){//노드가 여러개일 때
+                //첫번째 노드를 삭제할 경우
+                start=start.link;                
+            }
+            else if (Length() == x + 1)
             {
+                //마지막 노드를 삭제할 경우
                 end = GetNode(x - 1);
                 GetNode(x - 1).link = null;
             }
             else
-            {
+            {   //중간 노드를 삭제할 경우
                 GetNode(x - 1).link = GetNode(x + 1);
             }
 
         }                // 인덱스 값을 넣어서 지우는 함수
-
+/*
         public void Del(Node<T> y)
         {
             if (start == y)
@@ -123,10 +128,14 @@ namespace ConsoleApp1
                     temp1 = temp2;
                     temp2 = temp2.link;
                 }
-                temp1.link = temp2.link;
+                if(temp2==end){
+                    temp1.link=temp2;
+                }else{
+                    temp1.link = temp2.link;
+                }
             }
         }               // 노드를 직접 넣어서 지우는 함수
-
+*/
         public int Length()
         {
             int count = 0;
@@ -143,6 +152,9 @@ namespace ConsoleApp1
         {
             Console.WriteLine(Get(x));
         }                // 해당 번호의 노드에 담긴 정보를 출력해주는 함수
+        
+        
+        
 
         public int CompareTo(object obj)
         {
