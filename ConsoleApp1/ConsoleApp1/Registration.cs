@@ -21,9 +21,9 @@ namespace ConsoleApp1
 			        studentList[i].id = 1001 + i;
 		        else
 			        studentList[i].id = -1;
-                studentList[i].classList = new SingleLinkedList<ClassInfo>();
+                studentList[i].classList = new SingleLinkedList<ClassInfo>();//*********
 	        }
-            //기본 20명의 학생정보 출력
+            //기본 학생정보 출력
             Console.WriteLine();
             Console.WriteLine("기등록 된 " + Program.MIN_STUDENT_CNT + "명의 학생 목록");
 
@@ -102,7 +102,7 @@ namespace ConsoleApp1
                     }
                     */
                     
-                    foreach (ClassInfo ci in studentList[i].classList)
+                    foreach (ClassInfo ci in studentList[i].classList)//**************
                     {
 
                         Console.Write("  (과목명: " + ci.code + ", " + ci.section.ToString() + "분반 , " +ci.credit.ToString() + "학점)");
@@ -156,12 +156,12 @@ namespace ConsoleApp1
         	
             // 학생 등록
 	        studentList[i].id = stuID;
-            studentList[i].classList = new SingleLinkedList<ClassInfo>();
+            studentList[i].classList = new SingleLinkedList<ClassInfo>();//***********
             Console.WriteLine(stuID.ToString() + " 추가되었습니다.\n");
         }
         
         //	과목 등록
-        private void AddClass(StudentInfo[] studentList)
+        private void AddClass(StudentInfo[] studentList)//***************
         {
 	        int stuID = 0;
 	        int index = -1;

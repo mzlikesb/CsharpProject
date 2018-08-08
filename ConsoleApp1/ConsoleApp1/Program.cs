@@ -18,11 +18,11 @@ namespace ConsoleApp1
     struct StudentInfo
     {
         public int id;
-        public SingleLinkedList<ClassInfo> classList;
+        public SingleLinkedList<ClassInfo> classList;//*******
     }
 
     class Program
-    {   //기본 학생수 20명, 최대 학생수 30명;
+    {   //기본 학생수, 최대 학생수 설정;
         public const int MAX_STUDENT_CNT = 999;
         public const int MIN_STUDENT_CNT = 10;
 
