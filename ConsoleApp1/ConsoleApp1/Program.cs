@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +18,11 @@ namespace ConsoleApp1
     struct StudentInfo
     {
         public int id;
-        public SingleLinkedList<ClassInfo> classList;//*******
+        public List<ClassInfo> classList;
     }
 
     class Program
-    {   //기본 학생수, 최대 학생수 설정;
+    {   //기본 학생수 , 최대 학생수 초기화;
         public const int MAX_STUDENT_CNT = 999;
         public const int MIN_STUDENT_CNT = 10;
 
