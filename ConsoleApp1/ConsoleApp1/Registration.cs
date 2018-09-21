@@ -92,16 +92,7 @@ namespace ConsoleApp1
                     Console.WriteLine("");
                 }
                 else
-                {
-                    /*
-                    for (int j = 0; j < studentList[i].classList.Length(); j++)
-                    {
-                        Console.Write("("+studentList[i].classList.Get(j).code + ", ");
-                        Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
-                        Console.Write(studentList[i].classList.Get(j).credit.ToString()+") ");
-                    }
-                    */
-                    
+                {                                        
                     foreach (ClassInfo ci in studentList[i].classList)//**************
                     {
 
@@ -294,14 +285,6 @@ namespace ConsoleApp1
             {
                 Console.WriteLine(" {0}. {1,-10}{2,12}{3,20}",ii++, ci.code, ci.section, ci.credit);
             }
-            /*
-            for (int j = 0; j < studentList[i].classList.Length(); j++)
-            {
-                Console.Write("(" + studentList[i].classList.Get(j).code + ", ");
-                Console.Write(studentList[i].classList.Get(j).section.ToString() + ", ");
-                Console.Write(studentList[i].classList.Get(j).credit.ToString() + ") ");
-                Console.WriteLine("");
-            }*/
             Console.WriteLine("-------------------------------------------------");
 
             // 드랍할 과목 정보 입력
